@@ -20,7 +20,6 @@ export default function Athletes() {
   const [selectedAthlete, setSelectedAthlete] = useState<any>(null);
 
   const { data: athletes = [], isLoading } = useQuery({
-    queryKey: ["/api/users", { role: UserRoles.ATHLETE }],
     queryKey: ["/api/users?role=athlete"],
   });
 

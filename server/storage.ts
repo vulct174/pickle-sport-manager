@@ -140,8 +140,16 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const user: User = {
-      ...insertUser,
       id: this.currentUserId++,
+      username: insertUser.username,
+      password: insertUser.password,
+      email: insertUser.email,
+      fullName: insertUser.fullName,
+      role: insertUser.role,
+      phone: insertUser.phone ?? null,
+      clubId: insertUser.clubId ?? null,
+      skillLevel: insertUser.skillLevel ?? null,
+      isActive: insertUser.isActive ?? null,
       createdAt: new Date(),
     };
     this.users.set(user.id, user);
@@ -168,8 +176,14 @@ export class MemStorage implements IStorage {
 
   async createClub(insertClub: InsertClub): Promise<Club> {
     const club: Club = {
-      ...insertClub,
       id: this.currentClubId++,
+      name: insertClub.name,
+      description: insertClub.description ?? null,
+      location: insertClub.location ?? null,
+      contactEmail: insertClub.contactEmail ?? null,
+      contactPhone: insertClub.contactPhone ?? null,
+      ownerId: insertClub.ownerId ?? null,
+      isActive: insertClub.isActive ?? null,
       createdAt: new Date(),
     };
     this.clubs.set(club.id, club);
@@ -187,9 +201,20 @@ export class MemStorage implements IStorage {
 
   async createTournament(insertTournament: InsertTournament): Promise<Tournament> {
     const tournament: Tournament = {
-      ...insertTournament,
       id: this.currentTournamentId++,
+      name: insertTournament.name,
+      description: insertTournament.description ?? null,
+      location: insertTournament.location,
+      startDate: insertTournament.startDate,
+      endDate: insertTournament.endDate,
+      registrationStartDate: insertTournament.registrationStartDate,
+      registrationEndDate: insertTournament.registrationEndDate,
+      maxParticipants: insertTournament.maxParticipants,
       currentParticipants: 0,
+      categories: insertTournament.categories,
+      status: insertTournament.status,
+      organizerId: insertTournament.organizerId,
+      isActive: insertTournament.isActive ?? null,
       createdAt: new Date(),
     };
     this.tournaments.set(tournament.id, tournament);

@@ -26,7 +26,6 @@ export default function Dashboard() {
   });
 
   const { data: pendingRegistrations = [] } = useQuery({
-    queryKey: ["/api/registrations", { status: "pending" }],
     queryKey: ["/api/registrations?status=pending"],
   });
 

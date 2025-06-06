@@ -17,7 +17,6 @@ export default function TournamentBracket({ tournament }: TournamentBracketProps
   const [selectedMatch, setSelectedMatch] = useState<any>(null);
 
   const { data: matches = [] } = useQuery({
-    queryKey: ["/api/matches", tournament.id],
     queryKey: [`/api/matches?tournament_id=${tournament.id}`],
   });
 
