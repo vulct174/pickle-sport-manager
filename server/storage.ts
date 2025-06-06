@@ -209,9 +209,9 @@ export class MemStorage implements IStorage {
       endDate: insertTournament.endDate,
       registrationStartDate: insertTournament.registrationStartDate,
       registrationEndDate: insertTournament.registrationEndDate,
-      maxParticipants: insertTournament.maxParticipants,
+      maxParticipants: insertTournament.maxParticipants ?? null,
       currentParticipants: 0,
-      categories: insertTournament.categories,
+      categories: insertTournament.categories ?? null,
       status: insertTournament.status,
       organizerId: insertTournament.organizerId,
       isActive: insertTournament.isActive ?? null,
@@ -247,8 +247,14 @@ export class MemStorage implements IStorage {
 
   async createRegistration(insertRegistration: InsertRegistration): Promise<Registration> {
     const registration: Registration = {
-      ...insertRegistration,
       id: this.currentRegistrationId++,
+      athleteId: insertRegistration.athleteId,
+      tournamentId: insertRegistration.tournamentId,
+      category: insertRegistration.category,
+      skillLevel: insertRegistration.skillLevel,
+      status: insertRegistration.status,
+      partnerId: insertRegistration.partnerId ?? null,
+      notes: insertRegistration.notes ?? null,
       registeredAt: new Date(),
       approvedAt: null,
       approvedBy: null,
@@ -291,8 +297,20 @@ export class MemStorage implements IStorage {
 
   async createMatch(insertMatch: InsertMatch): Promise<Match> {
     const match: Match = {
-      ...insertMatch,
       id: this.currentMatchId++,
+      tournamentId: insertMatch.tournamentId,
+      category: insertMatch.category,
+      round: insertMatch.round,
+      player1Id: insertMatch.player1Id,
+      player2Id: insertMatch.player2Id ?? null,
+      partner1Id: insertMatch.partner1Id ?? null,
+      partner2Id: insertMatch.partner2Id ?? null,
+      status: insertMatch.status,
+      score: insertMatch.score ?? null,
+      notes: insertMatch.notes ?? null,
+      scheduledTime: insertMatch.scheduledTime ?? null,
+      courtNumber: insertMatch.courtNumber ?? null,
+      refereeId: insertMatch.refereeId ?? null,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
